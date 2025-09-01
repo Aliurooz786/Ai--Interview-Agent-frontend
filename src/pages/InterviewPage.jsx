@@ -116,7 +116,7 @@ function InterviewPage() {
               rows="8"
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded-md focus-outline-none focus:ring-2 focus:ring-teal-500 transition"
+              className="w-full p-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
               placeholder="Type your answer here..."
               disabled={isSubmitting || isLoading}
             />

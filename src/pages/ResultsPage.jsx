@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import interviewService from '../services/interviewService'; 
+import interviewService from '../services/interviewService';
 
 function ResultsPage() {
   const { interviewId } = useParams();
-  
-  
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
-  
   useEffect(() => {
     const fetchResults = async () => {
       console.log(`[ResultsPage] Interview [${interviewId}] ke results fetch kar rahe hain...`);
       try {
-        
         const data = await interviewService.getInterviewResults(interviewId);
-        setResults(data); 
+        setResults(data);
       } catch (err) {
         console.error("Results fetch karne mein galti hui:", err);
         setError("Could not load the interview results. Please try again later.");
       } finally {
-       
         setIsLoading(false);
       }
     };
@@ -30,7 +25,6 @@ function ResultsPage() {
     fetchResults();
   }, [interviewId]);
 
-  
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
@@ -39,7 +33,6 @@ function ResultsPage() {
     );
   }
 
-  
   if (error) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
@@ -54,7 +47,6 @@ function ResultsPage() {
         <h1 className="text-4xl font-bold text-teal-400 text-center mb-2">Interview Report</h1>
         <p className="text-center text-gray-400 mb-8">Role: {results?.jobRoleTitle}</p>
 
-        {/* Summary Card */}
         <div className="bg-gray-800 p-6 rounded-lg shadow-xl mb-8">
           <h2 className="text-2xl font-bold text-white mb-4">Overall Summary</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -69,7 +61,6 @@ function ResultsPage() {
           </div>
         </div>
 
-        {/* Question by Question Analysis */}
         <h2 className="text-2xl font-bold text-white mb-4">Question Analysis</h2>
         <div className="space-y-4">
           {results?.results?.map((item, index) => (
