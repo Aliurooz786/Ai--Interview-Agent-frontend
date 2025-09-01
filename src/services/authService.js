@@ -23,7 +23,7 @@ const login = async (email, password) => {
 const register = async (fullName, email, password) => {
   console.log('[authService] Register function shuru hua. User:', fullName);
   try {
-    // Is baar hum /register endpoint par request bhej rahe hain.
+    
     const response = await axios.post(API_URL + '/register', {
       fullName,
       email,

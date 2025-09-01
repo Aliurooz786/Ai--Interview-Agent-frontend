@@ -4,7 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
-import InterviewPage from './pages/InterviewPage'; 
+import InterviewPage from './pages/InterviewPage';
+import ResultsPage from './pages/ResultsPage'; 
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/interview/:interviewId" element={<InterviewPage />} />
+        
+        {/*  "Report Card " */}
+        <Route path="/results/:interviewId" element={<ResultsPage />} />
 
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

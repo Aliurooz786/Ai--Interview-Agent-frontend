@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import interviewService from '../services/interviewService';
+import { useParams, Link } from 'react-router-dom';
+import interviewService from '../services/interviewService'; 
 
 function ResultsPage() {
   const { interviewId } = useParams();
+  
+  
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
+  
   useEffect(() => {
     const fetchResults = async () => {
       console.log(`[ResultsPage] Interview [${interviewId}] ke results fetch kar rahe hain...`);
       try {
+        
         const data = await interviewService.getInterviewResults(interviewId);
-        setResults(data);
+        setResults(data); 
       } catch (err) {
         console.error("Results fetch karne mein galti hui:", err);
         setError("Could not load the interview results. Please try again later.");
       } finally {
+       
         setIsLoading(false);
       }
     };
@@ -25,6 +30,7 @@ function ResultsPage() {
     fetchResults();
   }, [interviewId]);
 
+  
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
@@ -33,6 +39,7 @@ function ResultsPage() {
     );
   }
 
+  
   if (error) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
@@ -60,10 +67,6 @@ function ResultsPage() {
               <p className="text-lg font-semibold text-yellow-400">{results?.overallScore ?? 'Pending'}</p>
             </div>
           </div>
-          <div className="mt-4">
-            <p className="text-sm text-gray-400">Summary Feedback</p>
-            <p className="text-gray-300 mt-1">{results?.summaryFeedback ?? 'Pending final review.'}</p>
-          </div>
         </div>
 
         {/* Question by Question Analysis */}
@@ -80,9 +83,16 @@ function ResultsPage() {
             </div>
           ))}
         </div>
+        
+        <div className="text-center mt-8">
+          <Link to="/dashboard" className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-md">
+            Back to Dashboard
+          </Link>
+        </div>
       </div>
     </div>
   );
 }
 
 export default ResultsPage;
+
