@@ -1,22 +1,22 @@
 import { Routes, Route } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import Navbar from './components/shared/Navbar';
+import TrainersPage from './pages/TrainersPage'; // <-- Naya page import karein
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="container mx-auto p-6">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-        </Routes>
-      </main>
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="trainers" element={<TrainersPage />} /> {/* <-- Naya route add karein */}
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;
+
