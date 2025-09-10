@@ -1,28 +1,22 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import DashboardPage from './pages/DashboardPage';
-import InterviewPage from './pages/InterviewPage';
-import ResultsPage from './pages/ResultsPage';
-import GenerateInterviewPage from './pages/GenerateInterviewPage';
+import Navbar from './components/shared/Navbar';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/interview/:interviewId" element={<InterviewPage />} />
-        <Route path="/results/:interviewId" element={<ResultsPage />} />
-        <Route path="/generate-interview" element={<GenerateInterviewPage />} />
-        <Route path="*" element={<Navigate to="/login" />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <main className="container mx-auto p-6">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Routes>
+      </main>
+    </div>
+  )
 }
 
 export default App;
-
