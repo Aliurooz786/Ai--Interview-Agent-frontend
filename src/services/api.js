@@ -1,14 +1,19 @@
 import axios from 'axios';
 
-// Backend ka base URL yahan set kar dein
+
 const API_BASE_URL = 'http://localhost:8090/api';
 
-// Ek pre-configured axios instance banayein
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+const apiClient = axios.create({
+    baseURL: API_BASE_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
 });
 
-export default api;
+export const getAllTrainers = () => apiClient.get('/public/trainers');
+
+
+export const loginUser = (credentials) => apiClient.post('/auth/login', credentials);
+
+export const registerUser = (userData) => apiClient.post('/auth/register', userData);
+
